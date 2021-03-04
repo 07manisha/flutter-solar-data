@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:solardata/solar_data/about_us/AboutUsPage.dart';
 import 'package:solardata/solar_data/solar_calculated_condition_model.dart';
 import 'package:solardata/solar_data/solar_prototype.dart';
+import 'package:solardata/solar_data/terms_conditions/terms_condition_page.dart';
 import 'package:xml2json/xml2json.dart';
 
 class SolarDataHome extends StatelessWidget {
@@ -20,27 +22,31 @@ class SolarDataHome extends StatelessWidget {
           children: <Widget>[
             Container(
                 height: 100.0,
+                margin: EdgeInsets.all(12.0),
                 child: DrawerHeader(
                   child: Center(
                       child: Text(
                     'Solar Live Data',
                     style: TextStyle(
                       fontFamily: 'Raleway',
+                      fontSize: 18,
                     ),
                   )),
                 )),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text('About Us'),
+              title: Text('About Us', style: TextStyle(fontSize: 16)),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.of(context).push(_createRoute(AboutUsPage()));
               },
             ),
             ListTile(
               leading: Icon(Icons.privacy_tip),
-              title: Text('Terms & Conditions'),
+              title: Text('Terms & Conditions', style: TextStyle(fontSize: 16)),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.of(context).push(_createRoute(TermsConditionPage()));
               },
             ),
           ],
@@ -84,17 +90,39 @@ class SolarDataHome extends StatelessWidget {
                     ),
                   ),
                   Card(
-                    child: Column(
-                      children: <Widget>[
-                        _rowItem('Bands', 'Day', 'Night'),
-                        _buildWidgetsFromApi(context),
-                      ],
+                    child: Container(
+                      margin: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: <Widget>[
+                          _headerRowItem('Bands', 'Day', 'Night'),
+                          _buildWidgetsFromApi(context),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           )),
+    );
+  }
+
+  Route _createRoute(dynamic screen) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => screen,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: tween.animate(animation),
+          child: child,
+        );
+      },
     );
   }
 
@@ -164,7 +192,7 @@ class SolarDataHome extends StatelessWidget {
                   snapshot.data.solarCalculatedConditionModels),
             );
           } else {
-            return CircularProgressIndicator();
+            return Container();
           }
         });
   }
@@ -178,6 +206,48 @@ class SolarDataHome extends StatelessWidget {
       widgetList.add(current);
     }
     return widgetList;
+  }
+
+  Widget _headerRowItem(String band, String day, String night) {
+    return Container(
+        child: Container(
+      margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                width: 140,
+                child: Center(
+                  child: Text(
+                    band,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              Container(
+                width: 100,
+                child: Center(
+                  child: Text(
+                    day,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              Container(
+                width: 60,
+                child: Text(
+                  night,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          Divider(),
+        ],
+      ),
+    ));
   }
 
   Widget _rowItem(String banda, String day, String night) {
@@ -209,14 +279,29 @@ class SolarDataHome extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Text(
-                banda,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Container(
+                width: 140,
+                child: Center(
+                  child: Text(
+                    banda,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+                  ),
+                ),
               ),
-              Text(day, style: TextStyle(fontSize: 16, color: dayColor)),
-              Text(night, style: TextStyle(fontSize: 16, color: nightColor)),
+              Container(
+                width: 100,
+                child: Center(
+                  child: Text(day,
+                      style: TextStyle(fontSize: 16, color: dayColor)),
+                ),
+              ),
+              Container(
+                width: 60,
+                child: Text(night,
+                    style: TextStyle(fontSize: 16, color: nightColor)),
+              ),
             ],
           ),
           Divider(),
