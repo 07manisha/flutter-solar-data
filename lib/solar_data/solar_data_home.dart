@@ -15,6 +15,37 @@ class SolarDataHome extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text('Solar Data')),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            Container(
+                height: 100.0,
+                child: DrawerHeader(
+                  child: Center(
+                      child: Text(
+                    'Solar Live Data',
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                    ),
+                  )),
+                )),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About Us'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.privacy_tip),
+              title: Text('Terms & Conditions'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       body: Container(
           margin: EdgeInsets.all(10.0),
           child: SingleChildScrollView(
@@ -196,7 +227,7 @@ class SolarDataHome extends StatelessWidget {
 
   Future<SolarPrototype> getData() async {
     try {
-      String url1 = "http://www.hamqsl.com/solarxml.php";
+      String url1 = "https://www.hamqsl.com/solarxml.php";
       http.Response response = await http.get(url1);
       xml2json.parse(response.body);
       var jsonData = xml2json.toGData();
