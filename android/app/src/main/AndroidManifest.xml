@@ -5,7 +5,7 @@
 
    <application
         android:label="solardata"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/solar_logo">
        <uses-library
            android:name="org.apache.http.legacy"
            android:required="false" />

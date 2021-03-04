@@ -25,17 +25,32 @@ class SolarDataHome extends StatelessWidget {
                 margin: EdgeInsets.all(12.0),
                 child: DrawerHeader(
                   child: Center(
-                      child: Text(
-                    'Solar Live Data',
-                    style: TextStyle(
-                      fontFamily: 'Raleway',
-                      fontSize: 18,
-                    ),
-                  )),
+                    child: Row(children: <Widget>[
+                      FadeInImage.assetNetwork(
+                        placeholder: 'assets/solar_logo.png',
+                        image: 'assets/solar_logo.png',
+                        height: 95,
+                        fit: BoxFit.cover,
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(8),
+                        child: Text(
+                          'Solar Live Data',
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
                 )),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text('About Us', style: TextStyle(fontSize: 16)),
+              title: Text(
+                'About Us',
+                style: TextStyle(fontFamily: 'Raleway', fontSize: 16),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(_createRoute(AboutUsPage()));
@@ -43,7 +58,11 @@ class SolarDataHome extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.privacy_tip),
-              title: Text('Terms & Conditions', style: TextStyle(fontSize: 16)),
+              title: Text('Terms & Conditions',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Raleway',
+                  )),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(_createRoute(TermsConditionPage()));
@@ -65,7 +84,8 @@ class SolarDataHome extends StatelessWidget {
                       child: Text(
                         "Basic Info",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
+                            fontFamily: 'Heading',
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).primaryColor),
                       ),
@@ -83,7 +103,8 @@ class SolarDataHome extends StatelessWidget {
                       child: Text(
                         "Calculated Solar Conditions",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
+                            fontFamily: 'Heading',
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).primaryColor),
                       ),
@@ -170,11 +191,15 @@ class SolarDataHome extends StatelessWidget {
                   title,
                   style: TextStyle(
                       fontSize: 18,
+                      fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
                 Text(value,
-                    style: TextStyle(fontSize: 16, color: Colors.black)),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Raleway',
+                        color: Colors.black)),
               ],
             ),
             Divider(),
@@ -222,7 +247,10 @@ class SolarDataHome extends StatelessWidget {
                 child: Center(
                   child: Text(
                     band,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -231,7 +259,10 @@ class SolarDataHome extends StatelessWidget {
                 child: Center(
                   child: Text(
                     day,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -239,7 +270,10 @@ class SolarDataHome extends StatelessWidget {
                 width: 60,
                 child: Text(
                   night,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -286,7 +320,10 @@ class SolarDataHome extends StatelessWidget {
                 child: Center(
                   child: Text(
                     banda,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.normal),
                   ),
                 ),
               ),
@@ -294,13 +331,19 @@ class SolarDataHome extends StatelessWidget {
                 width: 100,
                 child: Center(
                   child: Text(day,
-                      style: TextStyle(fontSize: 16, color: dayColor)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Raleway',
+                          color: dayColor)),
                 ),
               ),
               Container(
                 width: 60,
                 child: Text(night,
-                    style: TextStyle(fontSize: 16, color: nightColor)),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Raleway',
+                        color: nightColor)),
               ),
             ],
           ),
