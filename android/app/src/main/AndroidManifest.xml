@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="solardata"
+        android:label="HF Propagation"
         android:icon="@drawable/solar_logo">
        <uses-library
            android:name="org.apache.http.legacy"

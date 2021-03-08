@@ -16,7 +16,7 @@ class SolarDataHome extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(title: Text('Solar Data')),
+      appBar: AppBar(title: Text('HF Propagation')),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -35,7 +35,7 @@ class SolarDataHome extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.all(8),
                         child: Text(
-                          'Solar Live Data',
+                          'HF Propagation',
                           style: TextStyle(
                             fontFamily: 'Raleway',
                             fontSize: 18,
@@ -82,7 +82,7 @@ class SolarDataHome extends StatelessWidget {
                     child: Container(
                       margin: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 12.0),
                       child: Text(
-                        "Basic Info",
+                        "Solar Data",
                         style: TextStyle(
                             fontSize: 22,
                             fontFamily: 'Heading',
@@ -101,7 +101,7 @@ class SolarDataHome extends StatelessWidget {
                     child: Container(
                       margin: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 12.0),
                       child: Text(
-                        "Calculated Solar Conditions",
+                        "HF Conditions",
                         style: TextStyle(
                             fontSize: 22,
                             fontFamily: 'Heading',
@@ -121,6 +121,24 @@ class SolarDataHome extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 12.0),
+                      child: Text(
+                        "VHF Conditions",
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontFamily: 'Heading',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                  Card(
+                      child: Column(children: <Widget>[
+                        _widgetSolarIntroData(),
+                      ])),
                 ],
               ),
             ),
@@ -163,6 +181,24 @@ class SolarDataHome extends StatelessWidget {
           }
         });
   }
+
+  Widget _widgetVHFData() {
+    return FutureBuilder<SolarPrototype>(
+        future: getData(),
+        builder: (context, AsyncSnapshot<SolarPrototype> snapshot) {
+          if (snapshot.hasData) {
+            return Container(
+              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+              child: Column(
+                children: _widgetSolarIntroItems(snapshot.data),
+              ),
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
+  }
+
 
   List<Widget> _widgetSolarIntroItems(SolarPrototype solarPrototype) {
     List<Widget> results = new List<Widget>();
@@ -391,12 +427,15 @@ class SolarDataHome extends StatelessWidget {
       print(solarData);
       print(solarData['solarflux']['\$t']);
 
+      // fetching the vhf conditoins and append it into a list
+
+
       SolarPrototype solarPrototype = new SolarPrototype(
           listResults,
           solarData['updated']['\$t'],
           solarData['solarflux']['\$t'],
           solarData['xray']['\$t'],
-          solarData['sunspots']['\$t']);
+          solarData['sunspots']['\$t'], solarData['calculatedvhfconditions']);
 
       return solarPrototype;
     } catch (e) {

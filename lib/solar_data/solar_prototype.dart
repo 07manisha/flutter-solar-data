@@ -9,12 +9,14 @@ class SolarPrototype {
   String _sunspots;
   String _solarwind;
 
+  List<VHFConditionsPrototype> _listVHFConditions;
+
   SolarPrototype(
     this._solarCalculatedConditionModels,
     this._updated,
     this._solarflux,
     this._xray,
-    this._sunspots,
+    this._sunspots, this._listVHFConditions
   );
 
   String get solarwind => _solarwind;
@@ -54,4 +56,32 @@ class SolarPrototype {
       List<SolarCalculatedConditionModel> value) {
     _solarCalculatedConditionModels = value;
   }
+}
+
+
+class VHFConditionsPrototype{
+  String _name, _location, _value;
+
+
+  VHFConditionsPrototype(this._name, this._location, this._value);
+
+  String get name => _name;
+
+  set name(String value) {
+    _name = value;
+  }
+
+  get location => _location;
+
+  set location(value) {
+    _location = value;
+  }
+
+  get value => _value;
+
+  set value(value) {
+    _value = value;
+  }
+
+
 }
