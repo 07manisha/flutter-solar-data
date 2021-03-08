@@ -11,13 +11,24 @@ class SolarPrototype {
 
   List<VHFConditionsPrototype> _listVHFConditions;
 
+  //calculated conditions data
+  CalculatedConditionsFields _calculatedConditionsFields;
+
+
   SolarPrototype(
     this._solarCalculatedConditionModels,
     this._updated,
     this._solarflux,
     this._xray,
-    this._sunspots, this._listVHFConditions
+    this._sunspots, this._listVHFConditions, this._calculatedConditionsFields
   );
+
+  CalculatedConditionsFields get calculatedConditionsFields =>
+      _calculatedConditionsFields;
+
+  set calculatedConditionsFields(CalculatedConditionsFields value) {
+    _calculatedConditionsFields = value;
+  }
 
   String get solarwind => _solarwind;
 
@@ -88,7 +99,48 @@ class VHFConditionsPrototype{
   set value(value) {
     _value = value;
   }
-
-
-
 }
+
+
+class CalculatedConditionsFields{
+  //calculated conditions data
+  String _geomagneticField;
+  String _signalNoiseField;
+  String _muffactorFieldValue;
+  String _fof2Value;
+  String _mufValue;
+
+  CalculatedConditionsFields(this._geomagneticField, this._signalNoiseField,
+      this._muffactorFieldValue, this._fof2Value, this._mufValue);
+
+  String get mufValue => _mufValue;
+
+  set mufValue(String value) {
+    _mufValue = value;
+  }
+
+  String get fof2Value => _fof2Value;
+
+  set fof2Value(String value) {
+    _fof2Value = value;
+  }
+
+  String get muffactorFieldValue => _muffactorFieldValue;
+
+  set muffactorFieldValue(String value) {
+    _muffactorFieldValue = value;
+  }
+
+  String get signalNoiseField => _signalNoiseField;
+
+  set signalNoiseField(String value) {
+    _signalNoiseField = value;
+  }
+
+  String get geomagneticField => _geomagneticField;
+
+  set geomagneticField(String value) {
+    _geomagneticField = value;
+  }
+}
+

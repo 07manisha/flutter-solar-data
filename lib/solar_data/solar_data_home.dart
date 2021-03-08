@@ -157,7 +157,7 @@ class SolarDataHome extends StatelessWidget {
                   Card(
                     child: Column(
                       children: <Widget>[
-                        _widgetVHFData(),
+                        _widgetCalculatedCondtionsData(),
                       ],
                     ),
                   ),
@@ -221,6 +221,23 @@ class SolarDataHome extends StatelessWidget {
         });
   }
 
+  Widget _widgetCalculatedCondtionsData() {
+    return FutureBuilder<SolarPrototype>(
+        future: getData(),
+        builder: (context, AsyncSnapshot<SolarPrototype> snapshot) {
+          if (snapshot.hasData) {
+            return Container(
+              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+              child: Column(
+                children: _widgetCalculatedCondition(snapshot.data),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        });
+  }
+
   List<Widget> _widgetVHFItems(SolarPrototype solarPrototype) {
     VHFModel vhfModel = new VHFModel(solarPrototype);
     List<Widget> results = new List<Widget>();
@@ -237,6 +254,22 @@ class SolarDataHome extends StatelessWidget {
 
     return results;
   }
+
+  List<Widget> _widgetCalculatedCondition(SolarPrototype solarPrototype) {
+   CalculatedConditionsFields calculatedConditionsFields = solarPrototype.calculatedConditionsFields;
+    List<Widget> results = new List<Widget>();
+    results
+        .add(_widgetSolarIntroItem("Geo-Magnetic Field", calculatedConditionsFields.geomagneticField ?? '-'));
+    results.add(_widgetSolarIntroItem("Signal Noise", calculatedConditionsFields.signalNoiseField ?? '-'));
+    results.add(_widgetSolarIntroItem("FoF2", calculatedConditionsFields.fof2Value ?? '-'));
+    results.add(_widgetSolarIntroItem(
+        "Muff-Factor", calculatedConditionsFields.muffactorFieldValue ?? '-'));
+    results
+        .add(_widgetSolarIntroItem("Muf", calculatedConditionsFields.mufValue ?? '-'));
+
+    return results;
+  }
+
 
   List<Widget> _widgetSolarIntroItems(SolarPrototype solarPrototype) {
     List<Widget> results = new List<Widget>();
@@ -478,13 +511,23 @@ class SolarDataHome extends StatelessWidget {
         _listVHFConditions.add(vhfConditionsPrototype);
       }
 
+      // fetching the calculated conditions values
+      CalculatedConditionsFields calculatedConditionsFields =
+          new CalculatedConditionsFields(
+              solarData['geomagfield']['\$t'],
+              solarData['signalnoise']['\$t'],
+              solarData['muffactor']['\$t'],
+              solarData['fof2']['\$t'],
+              solarData['muf']['\$t']);
+
       SolarPrototype solarPrototype = new SolarPrototype(
           listResults,
           solarData['updated']['\$t'],
           solarData['solarflux']['\$t'],
           solarData['xray']['\$t'],
           solarData['sunspots']['\$t'],
-          _listVHFConditions);
+          _listVHFConditions,
+          calculatedConditionsFields);
 
       return solarPrototype;
     } catch (e) {
