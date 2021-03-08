@@ -492,11 +492,7 @@ class SolarDataHome extends StatelessWidget {
         listResults.add(prototype);
       });
 
-      print(164);
       var solarData = data['solar']['solardata'];
-      print(solarData['updated']['\$t']);
-      print(solarData);
-      print(solarData['solarflux']['\$t']);
 
       // fetching the vhf conditoins and append it into a list
       List<VHFConditionsPrototype> _listVHFConditions =
