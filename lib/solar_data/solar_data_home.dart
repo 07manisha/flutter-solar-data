@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:solardata/solar_data/about_us/AboutUsPage.dart';
+import 'package:solardata/solar_data/model/vhf_model.dart';
 import 'package:solardata/solar_data/solar_calculated_condition_model.dart';
 import 'package:solardata/solar_data/solar_prototype.dart';
 import 'package:solardata/solar_data/terms_conditions/terms_condition_page.dart';
@@ -137,8 +138,29 @@ class SolarDataHome extends StatelessWidget {
                   ),
                   Card(
                       child: Column(children: <Widget>[
-                        _widgetSolarIntroData(),
-                      ])),
+                    _widgetVHFData(),
+                  ])),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 12.0),
+                      child: Text(
+                        "Calculated Conditions",
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontFamily: 'Heading',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: Column(
+                      children: <Widget>[
+                        _widgetVHFData(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -190,15 +212,31 @@ class SolarDataHome extends StatelessWidget {
             return Container(
               margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
               child: Column(
-                children: _widgetSolarIntroItems(snapshot.data),
+                children: _widgetVHFItems(snapshot.data),
               ),
             );
           } else {
-            return CircularProgressIndicator();
+            return Container();
           }
         });
   }
 
+  List<Widget> _widgetVHFItems(SolarPrototype solarPrototype) {
+    VHFModel vhfModel = new VHFModel(solarPrototype);
+    List<Widget> results = new List<Widget>();
+    results
+        .add(_widgetSolarIntroItem("Aurora Lat", vhfModel.auroraLatVal ?? '-'));
+    results.add(_widgetSolarIntroItem("Aurora", vhfModel.auroraVal ?? '-'));
+    results.add(_widgetSolarIntroItem("Europe", vhfModel.europeVal ?? '-'));
+    results.add(_widgetSolarIntroItem(
+        "North America", vhfModel.northAmericaVal ?? '-'));
+    results
+        .add(_widgetSolarIntroItem("Europe 6m", vhfModel.europee6mVal ?? '-'));
+    results
+        .add(_widgetSolarIntroItem("Europe 4m", vhfModel.europe4mVal ?? '-'));
+
+    return results;
+  }
 
   List<Widget> _widgetSolarIntroItems(SolarPrototype solarPrototype) {
     List<Widget> results = new List<Widget>();
@@ -428,14 +466,25 @@ class SolarDataHome extends StatelessWidget {
       print(solarData['solarflux']['\$t']);
 
       // fetching the vhf conditoins and append it into a list
-
+      List<VHFConditionsPrototype> _listVHFConditions =
+          new List<VHFConditionsPrototype>();
+      _listVHFConditions.clear();
+      var vhfData = solarData['calculatedvhfconditions']['phenomenon'];
+      for (int i = 0; i < vhfData.length; i++) {
+        VHFConditionsPrototype vhfConditionsPrototype =
+            new VHFConditionsPrototype(
+                vhfData[i]['name'], vhfData[i]['location'], vhfData[i]['\$t']);
+        print(vhfConditionsPrototype.toString());
+        _listVHFConditions.add(vhfConditionsPrototype);
+      }
 
       SolarPrototype solarPrototype = new SolarPrototype(
           listResults,
           solarData['updated']['\$t'],
           solarData['solarflux']['\$t'],
           solarData['xray']['\$t'],
-          solarData['sunspots']['\$t'], solarData['calculatedvhfconditions']);
+          solarData['sunspots']['\$t'],
+          _listVHFConditions);
 
       return solarPrototype;
     } catch (e) {

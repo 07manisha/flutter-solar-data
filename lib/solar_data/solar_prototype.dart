@@ -56,6 +56,12 @@ class SolarPrototype {
       List<SolarCalculatedConditionModel> value) {
     _solarCalculatedConditionModels = value;
   }
+
+  List<VHFConditionsPrototype> get listVHFConditions => _listVHFConditions;
+
+  set listVHFConditions(List<VHFConditionsPrototype> value) {
+    _listVHFConditions = value;
+  }
 }
 
 
@@ -82,6 +88,7 @@ class VHFConditionsPrototype{
   set value(value) {
     _value = value;
   }
+
 
 
 }
