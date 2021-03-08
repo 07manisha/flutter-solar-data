@@ -256,32 +256,50 @@ class SolarDataHome extends StatelessWidget {
   }
 
   List<Widget> _widgetCalculatedCondition(SolarPrototype solarPrototype) {
-   CalculatedConditionsFields calculatedConditionsFields = solarPrototype.calculatedConditionsFields;
+    CalculatedConditionsFields calculatedConditionsFields =
+        solarPrototype.calculatedConditionsFields;
     List<Widget> results = new List<Widget>();
-    results
-        .add(_widgetSolarIntroItem("Geo-Magnetic Field", calculatedConditionsFields.geomagneticField ?? '-'));
-    results.add(_widgetSolarIntroItem("Signal Noise", calculatedConditionsFields.signalNoiseField ?? '-'));
-    results.add(_widgetSolarIntroItem("FoF2", calculatedConditionsFields.fof2Value ?? '-'));
+    results.add(_widgetSolarIntroItem("Geo-Magnetic Field",
+        calculatedConditionsFields.geomagneticField ?? '-'));
+    results.add(_widgetSolarIntroItem(
+        "Signal Noise", calculatedConditionsFields.signalNoiseField ?? '-'));
+    results.add(_widgetSolarIntroItem(
+        "FoF2", calculatedConditionsFields.fof2Value ?? '-'));
     results.add(_widgetSolarIntroItem(
         "Muff-Factor", calculatedConditionsFields.muffactorFieldValue ?? '-'));
-    results
-        .add(_widgetSolarIntroItem("Muf", calculatedConditionsFields.mufValue ?? '-'));
+    results.add(_widgetSolarIntroItem(
+        "Muf", calculatedConditionsFields.mufValue ?? '-'));
 
     return results;
   }
-
 
   List<Widget> _widgetSolarIntroItems(SolarPrototype solarPrototype) {
     List<Widget> results = new List<Widget>();
     results
         .add(_widgetSolarIntroItem("Updated", solarPrototype.updated ?? '-'));
-    results.add(_widgetSolarIntroItem("Xray", solarPrototype.xray ?? '-'));
     results.add(
         _widgetSolarIntroItem("Solar Flux", solarPrototype.solarflux ?? '-'));
+    results.add(_widgetSolarIntroItem("a Index", solarPrototype.aindex ?? '-'));
+    results.add(_widgetSolarIntroItem("k Index", solarPrototype.kindex ?? '-'));
     results.add(
-        _widgetSolarIntroItem("Solar Wind", solarPrototype.solarwind ?? '-'));
+        _widgetSolarIntroItem("k Indexent", solarPrototype.kindexent ?? '-'));
+    results.add(_widgetSolarIntroItem("X-Ray", solarPrototype.xray ?? '-'));
     results
         .add(_widgetSolarIntroItem("Sunspots", solarPrototype.sunspots ?? '-'));
+    results.add(
+        _widgetSolarIntroItem("Helium Line", solarPrototype.heliumline ?? '-'));
+    results.add(
+        _widgetSolarIntroItem("Proton Flux", solarPrototype.protonFlux ?? '-'));
+
+    results.add(_widgetSolarIntroItem("Aurora", solarPrototype.aurora ?? '-'));
+    results.add(_widgetSolarIntroItem(
+        "Normalization", solarPrototype.normalization ?? '-'));
+    results.add(
+        _widgetSolarIntroItem("Lat Degree", solarPrototype.latdegree ?? '-'));
+    results.add(
+        _widgetSolarIntroItem("Solar Wind", solarPrototype.solarwind ?? '-'));
+    results.add(_widgetSolarIntroItem(
+        "Magnetic Field", solarPrototype.magneticfield ?? '-'));
 
     return results;
   }
@@ -520,8 +538,19 @@ class SolarDataHome extends StatelessWidget {
           listResults,
           solarData['updated']['\$t'],
           solarData['solarflux']['\$t'],
+          solarData['aindex']['\$t'],
+          solarData['kindex']['\$t'],
+          solarData['kindexnt']['\$t'],
           solarData['xray']['\$t'],
           solarData['sunspots']['\$t'],
+          solarData['heliumline']['\$t'],
+          solarData['protonflux']['\$t'],
+          solarData['electonflux']['\$t'],
+          solarData['aurora']['\$t'],
+          solarData['normalization']['\$t'],
+          solarData['latdegree']['\$t'],
+          solarData['solarwind']['\$t'],
+          solarData['magneticfield']['\$t'],
           _listVHFConditions,
           calculatedConditionsFields);
 

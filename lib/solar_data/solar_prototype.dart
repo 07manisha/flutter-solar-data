@@ -5,29 +5,55 @@ class SolarPrototype {
 
   String _updated;
   String _solarflux;
+  String _aindex, _kindex, _kindexent;
   String _xray;
   String _sunspots;
+  String _heliumline;
+  String _protonFlux;
+  String _electronFlux;
+  String _aurora;
+  String _normalization;
+  String _latdegree;
   String _solarwind;
+  String _magneticfield;
 
   List<VHFConditionsPrototype> _listVHFConditions;
 
   //calculated conditions data
   CalculatedConditionsFields _calculatedConditionsFields;
 
-
   SolarPrototype(
-    this._solarCalculatedConditionModels,
-    this._updated,
-    this._solarflux,
-    this._xray,
-    this._sunspots, this._listVHFConditions, this._calculatedConditionsFields
-  );
+      this._solarCalculatedConditionModels,
+      this._updated,
+      this._solarflux,
+      this._aindex,
+      this._kindex,
+      this._kindexent,
+      this._xray,
+      this._sunspots,
+      this._heliumline,
+      this._protonFlux,
+      this._electronFlux,
+      this._aurora,
+      this._normalization,
+      this._latdegree,
+      this._solarwind,
+      this._magneticfield,
+      this._listVHFConditions,
+      this._calculatedConditionsFields);
 
   CalculatedConditionsFields get calculatedConditionsFields =>
       _calculatedConditionsFields;
 
   set calculatedConditionsFields(CalculatedConditionsFields value) {
     _calculatedConditionsFields = value;
+  }
+
+
+  String get aindex => _aindex;
+
+  set aindex(String value) {
+    _aindex = value;
   }
 
   String get solarwind => _solarwind;
@@ -73,12 +99,64 @@ class SolarPrototype {
   set listVHFConditions(List<VHFConditionsPrototype> value) {
     _listVHFConditions = value;
   }
+
+  get kindex => _kindex;
+
+  set kindex(value) {
+    _kindex = value;
+  }
+
+  get kindexent => _kindexent;
+
+  set kindexent(value) {
+    _kindexent = value;
+  }
+
+  String get heliumline => _heliumline;
+
+  set heliumline(String value) {
+    _heliumline = value;
+  }
+
+  String get protonFlux => _protonFlux;
+
+  set protonFlux(String value) {
+    _protonFlux = value;
+  }
+
+  String get electronFlux => _electronFlux;
+
+  set electronFlux(String value) {
+    _electronFlux = value;
+  }
+
+  String get aurora => _aurora;
+
+  set aurora(String value) {
+    _aurora = value;
+  }
+
+  String get normalization => _normalization;
+
+  set normalization(String value) {
+    _normalization = value;
+  }
+
+  String get latdegree => _latdegree;
+
+  set latdegree(String value) {
+    _latdegree = value;
+  }
+
+  String get magneticfield => _magneticfield;
+
+  set magneticfield(String value) {
+    _magneticfield = value;
+  }
 }
 
-
-class VHFConditionsPrototype{
+class VHFConditionsPrototype {
   String _name, _location, _value;
-
 
   VHFConditionsPrototype(this._name, this._location, this._value);
 
@@ -101,8 +179,7 @@ class VHFConditionsPrototype{
   }
 }
 
-
-class CalculatedConditionsFields{
+class CalculatedConditionsFields {
   //calculated conditions data
   String _geomagneticField;
   String _signalNoiseField;
@@ -143,4 +220,3 @@ class CalculatedConditionsFields{
     _geomagneticField = value;
   }
 }
-
