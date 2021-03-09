@@ -16,14 +16,21 @@ class AboutUsPage extends StatelessWidget {
               height: 145,
               fit: BoxFit.cover,
             ),
-            Container(
-              margin: EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'App by Apkmonk.com.\nData and XML feed provided by HAMQSL.com',
-                  style: TextStyle(
-                    fontFamily: 'Raleway',
-                    fontSize: 18,
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(8.0),
+                child: Container(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'App by Apkmonk.com.\n\nData and XML feed provided by HAMQSL.com',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+
+                        fontFamily: 'Raleway',
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ),
