@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solardata/solar_data/solar_data_home.dart';
 import 'package:http/http.dart' as http;
 import 'package:solardata/solar_data/solar_data_stateful.dart';
 
