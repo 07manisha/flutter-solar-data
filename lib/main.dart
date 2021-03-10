@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solardata/solar_data/solar_data_home.dart';
 import 'package:http/http.dart' as http;
+import 'package:solardata/solar_data/solar_data_stateful.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
 
       ),
-      home: SolarDataHome(),
+      home: SolarDataStateful(),
     );
   }
 }
