@@ -159,7 +159,7 @@ class _SolarDataStateful extends State<SolarDataStateful> {
         title: Text('HF Propagation'),
         actions: <Widget>[
           FlatButton(
-            textColor: Colors.white,
+            textColor: Colors.black,
             onPressed: () {_getData();},
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -262,6 +262,10 @@ class _SolarDataStateful extends State<SolarDataStateful> {
   }
 
   Widget _widgetSolarIntroItem(String title, String value) {
+    var colorTitle = Colors.black;
+    if(value.contains("Closed")){
+      colorTitle = Colors.red;
+    }
     return Container(
         margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
         child: Column(
@@ -281,7 +285,7 @@ class _SolarDataStateful extends State<SolarDataStateful> {
                     style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'Raleway',
-                        color: Colors.black)),
+                        color: colorTitle)),
               ],
             ),
             Divider(),
@@ -471,7 +475,7 @@ class _SolarDataStateful extends State<SolarDataStateful> {
     VHFModel vhfModel = new VHFModel(solarPrototype);
     List<Widget> results = new List<Widget>();
     results
-        .add(_widgetSolarIntroItem("Aurora Lat", vhfModel.auroraLatVal ?? '-'));
+        .add(_widgetSolarIntroItem("Aurora Lat", solarPrototype.latdegree?? '-'));
     results.add(_widgetSolarIntroItem("Aurora", vhfModel.auroraVal ?? '-'));
     results.add(_widgetSolarIntroItem("Europe", vhfModel.europeVal ?? '-'));
     results.add(_widgetSolarIntroItem(
@@ -599,6 +603,20 @@ class _SolarDataStateful extends State<SolarDataStateful> {
                     children: <Widget>[
                       _widgetCalculatedCondtionsData(),
                     ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 12.0),
+                    child: Text(
+                      "Copyright  Paul L Herrman ",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.normal,
+                          color: Theme.of(context).primaryColor),
+                    ),
                   ),
                 ),
               ],

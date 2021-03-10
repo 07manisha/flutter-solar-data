@@ -51,7 +51,7 @@ flutter:
   fonts:
     - family: Heading
       fonts:
-        - asset: fonts/Raleway-SemiBold.ttf
+        - asset: fonts/Roboto-Medium.ttf
     - family: Raleway
       fonts:
-        - asset: fonts/Raleway-Regular.ttf
+        - asset: fonts/Roboto-Regular.ttf
